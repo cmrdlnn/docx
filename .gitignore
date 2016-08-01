@@ -5,3 +5,4 @@ pkg/*
 doc/
 .vagrant/
 tmp/
+.byebug_history

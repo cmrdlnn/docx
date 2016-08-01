@@ -1,4 +1,4 @@
-unless Object.const_defined?("ActiveSupport")
+unless Object.const_defined?('ActiveSupport')
   class Module
     # Provides a delegate class method to easily expose contained objects' public methods
     # as your own. Pass one or more methods (specified as symbols or strings)
@@ -116,7 +116,8 @@ unless Object.const_defined?("ActiveSupport")
     def delegate(*methods)
       options = methods.pop
       unless options.is_a?(Hash) && to = options[:to]
-        raise ArgumentError, 'Delegation needs a target. Supply an options hash with a :to key as the last argument (e.g. delegate :hello, to: :greeter).'
+        raise ArgumentError, 'Delegation needs a target. Supply an options hash with a' \
+        ':to key as the last argument (e.g. delegate :hello, to: :greeter).'
       end
 
       prefix, allow_nil = options.values_at(:prefix, :allow_nil)

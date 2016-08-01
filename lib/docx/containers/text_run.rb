@@ -12,17 +12,17 @@ module Docx
           bold:      false,
           underline: false
         }
-        
+
         def self.tag
           'r'
         end
 
         attr_reader :text
         attr_reader :formatting
-        
+
         def initialize(node, document_properties = {})
           @node = node
-          @text_nodes = @node.xpath('w:t').map {|t_node| Elements::Text.new(t_node) }
+          @text_nodes = @node.xpath('w:t').map { |t_node| Elements::Text.new(t_node) }
           @properties_tag = 'rPr'
           @text       = parse_text || ''
           @formatting = parse_formatting || DEFAULT_FORMATTING
@@ -65,19 +65,19 @@ module Docx
           styles = {}
           styles['text-decoration'] = 'underline' if underlined?
           # No need to be granular with font size down to the span level if it doesn't vary.
-          styles['font-size'] = "#{font_size}pt" if font_size != @font_size 
+          styles['font-size'] = "#{font_size}pt" if font_size != @font_size
           html = html_tag(:span, content: html, styles: styles) unless styles.empty?
-          return html
+          html
         end
 
         def italicized?
           @formatting[:italic]
         end
-        
+
         def bolded?
           @formatting[:bold]
         end
-        
+
         def underlined?
           @formatting[:underline]
         end

@@ -1,7 +1,6 @@
 module Docx
   module Elements
-    class Text
-      include Element
+    class Text < Element
       delegate :content, :content=, to: :@node
 
       def self.tag

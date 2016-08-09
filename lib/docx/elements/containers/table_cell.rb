@@ -1,13 +1,7 @@
-require 'docx/containers/text_run'
-require 'docx/containers/container'
-
 module Docx
   module Elements
     module Containers
-      class TableCell
-        include Container
-        include Elements::Element
-
+      class TableCell < Container
         def self.tag
           'tc'
         end

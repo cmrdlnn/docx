@@ -1,13 +1,7 @@
-require 'docx/containers/table_cell'
-require 'docx/containers/container'
-
 module Docx
   module Elements
     module Containers
-      class TableColumn
-        include Container
-        include Elements::Element
-
+      class TableColumn < Container
         def self.tag
           'w:gridCol'
         end

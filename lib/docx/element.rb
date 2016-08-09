@@ -1,18 +1,8 @@
-require 'nokogiri'
-require 'docx/elements'
-require 'docx/containers'
+# encoding: utf-8
 
 module Docx
   module Elements
-    module Element
-      DEFAULT_TAG = ''
-
-      # Ensure that a 'tag' corresponding to the XML element that defines the element is defined
-      def self.included(base)
-        base.extend(ClassMethods)
-        base.const_set(:TAG, Element::DEFAULT_TAG) unless base.const_defined?(:TAG)
-      end
-
+    class Element
       attr_accessor :node
       delegate :at_xpath, :xpath, to: :@node
 
@@ -79,10 +69,10 @@ module Docx
         html << "</#{name}>"
       end
 
-      module ClassMethods
+      class << self
         def create_with(element)
           # Need to somehow get the xml document accessible here by default, but this is alright in the interim
-          new(Nokogiri::XML::Node.new("w:#{tag}", element.node))
+          new(Nokogiri::XML::Element.new("w:#{tag}", element.node))
         end
 
         def create_within(element)
@@ -93,4 +83,8 @@ module Docx
       end
     end
   end
+end
+
+Dir["#{__dir__}/elements/*.rb"].each do |element|
+  require element
 end

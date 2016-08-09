@@ -6,3 +6,4 @@ doc/
 .vagrant/
 tmp/
 .byebug_history
+.yardoc/

@@ -1,9 +1,6 @@
-require 'docx/elements/element'
-
 module Docx
   module Elements
-    class Bookmark
-      include Element
+    class Bookmark < Element
       attr_accessor :name
 
       def self.tag

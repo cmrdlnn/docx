@@ -1,12 +1,7 @@
-require 'docx/containers/container'
-
 module Docx
   module Elements
     module Containers
-      class TextRun
-        include Container
-        include Elements::Element
-
+      class TextRun < Container
         DEFAULT_FORMATTING = {
           italic:    false,
           bold:      false,

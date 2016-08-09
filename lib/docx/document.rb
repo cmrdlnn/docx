@@ -1,5 +1,4 @@
-require 'docx/containers'
-require 'docx/elements'
+require 'docx/element'
 require 'nokogiri'
 require 'zip'
 

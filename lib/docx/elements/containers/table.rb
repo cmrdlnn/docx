@@ -1,14 +1,7 @@
-require 'docx/containers/table_row'
-require 'docx/containers/table_column'
-require 'docx/containers/container'
-
 module Docx
   module Elements
     module Containers
-      class Table
-        include Container
-        include Elements::Element
-
+      class Table < Container
         def self.tag
           'tbl'
         end

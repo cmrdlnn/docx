@@ -1,13 +1,7 @@
-require 'docx/containers/table_cell'
-require 'docx/containers/container'
-
 module Docx
   module Elements
     module Containers
-      class TableRow
-        include Container
-        include Elements::Element
-
+      class TableRow < Container
         def self.tag
           'tr'
         end

@@ -1,13 +1,8 @@
-require 'docx/containers/text_run'
-require 'docx/containers/container'
 
 module Docx
   module Elements
     module Containers
-      class Paragraph
-        include Container
-        include Elements::Element
-
+      class Paragraph < Container
         def self.tag
           'p'
         end
@@ -90,4 +85,8 @@ module Docx
       end
     end
   end
+end
+
+Dir["#{__dir__}/paragraphs/*.rb"].each do |paragraph|
+  require paragraph
 end

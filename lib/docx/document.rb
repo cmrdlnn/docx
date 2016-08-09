@@ -74,7 +74,7 @@ module Docx
     end
 
     ##
-    # *Deprecated*
+    # @deprecated
     #
     # Iterates over paragraphs within document
     # call-seq:

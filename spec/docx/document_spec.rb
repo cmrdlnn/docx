@@ -34,8 +34,8 @@ describe Docx::Document do
     it 'should have properly formatted text runs' do
       @doc.each_paragraph do |p|
         p.each_text_run do |tr|
-          expect(tr).to be_an_instance_of(Docx::Elements::Containers::TextRun)
-          expect(tr.formatting).to eq(Docx::Elements::Containers::TextRun::DEFAULT_FORMATTING)
+          expect(tr).to be_an_instance_of(Docx::Elements::Containers::Run)
+          expect(tr.formatting).to eq(Docx::Elements::Containers::Run::DEFAULT_FORMATTING)
         end
       end
     end
@@ -163,7 +163,7 @@ describe Docx::Document do
     before do
       @doc = Docx::Document.open(@fixtures_path + '/formatting.docx')
       @formatting = @doc.paragraphs.map { |p| p.text_runs.map(&:formatting) }
-      @default_formatting = Docx::Elements::Containers::TextRun::DEFAULT_FORMATTING
+      @default_formatting = Docx::Elements::Containers::Run::DEFAULT_FORMATTING
       @only_italic = @default_formatting.merge italic: true
       @only_bold = @default_formatting.merge bold: true
       @only_underline = @default_formatting.merge underline: true

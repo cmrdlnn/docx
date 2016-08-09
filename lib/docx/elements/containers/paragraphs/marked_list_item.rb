@@ -6,9 +6,9 @@ module Docx
       class MarkedListItem < Paragraph
         def initialize(node, document_properties = {})
           super(node, document_properties)
-          properties
+          @bullet_style = 'ListParagraph'
+          @properties
         end
-      end
     end
   end
 end

@@ -6,6 +6,10 @@ module Docx
       attr_accessor :node
       delegate :at_xpath, :xpath, to: :@node
 
+      def initialize(node)
+        @node = node
+      end
+
       # TODO: Should create a docx object from this
       def parent(type = '*')
         @node.at_xpath("./parent::#{type}")

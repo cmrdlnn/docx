@@ -1,7 +1,7 @@
 module Docx
   module Elements
     module Containers
-      class TextRun < Container
+      class Run < Container
         DEFAULT_FORMATTING = {
           italic:    false,
           bold:      false,

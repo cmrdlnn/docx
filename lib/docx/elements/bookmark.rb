@@ -53,9 +53,9 @@ module Docx
         # the starting node
         if !(r_nodes = @node.xpath('./preceding-sibling::w:r')).empty?
           r_node = r_nodes.last
-          Containers::TextRun.new(r_node)
+          Containers::Run.new(r_node)
         else
-          new_r = Containers::TextRun.create_with(self)
+          new_r = Containers::Run.create_with(self)
           new_r.insert_before(self)
           new_r
         end
@@ -64,9 +64,9 @@ module Docx
       # Get text run immediately after bookmark node
       def get_run_after
         if (r_node = @node.at_xpath('./following-sibling::w:r'))
-          Containers::TextRun.new(r_node)
+          Containers::Run.new(r_node)
         else
-          new_r = Containers::TextRun.create_with(self)
+          new_r = Containers::Run.create_with(self)
           new_r.insert_after(self)
           new_r
         end

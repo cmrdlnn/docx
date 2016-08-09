@@ -21,11 +21,11 @@ module Docx
           if text_runs.size == 1
             text_runs.first.text = content
           elsif text_runs.empty?
-            new_r = TextRun.create_within(self)
+            new_r = Run.create_within(self)
             new_r.text = content
           else
             text_runs.each { |r| r.node.remove }
-            new_r = TextRun.create_within(self)
+            new_r = Run.create_within(self)
             new_r.text = content
           end
         end
@@ -48,7 +48,7 @@ module Docx
 
         # Array of text runs contained within paragraph
         def text_runs
-          @node.xpath('w:r|w:hyperlink/w:r').map { |r_node| Containers::TextRun.new(r_node, @document_properties) }
+          @node.xpath('w:r|w:hyperlink/w:r').map { |r_node| Containers::Run.new(r_node, @document_properties) }
         end
 
         # Iterate over each text run within a paragraph
@@ -75,7 +75,7 @@ module Docx
 
         alias text to_s
 
-        private
+        protected
 
         # Returns the alignment if any, or nil if left
         def alignment

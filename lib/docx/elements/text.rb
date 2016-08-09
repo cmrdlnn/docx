@@ -6,10 +6,6 @@ module Docx
       def self.tag
         't'
       end
-
-      def initialize(node)
-        @node = node
-      end
     end
   end
 end

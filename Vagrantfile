@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
     SHELL
   end
 
-  config.vm.define 'windows' do |win|
+  config.vm.define 'windows', autostart: false do |win|
     win.vm.box = 'opentable/win-8-pro-amd64-nocm'
     win.vm.provider('virtualbox') { |v| v.gui = true }
     win.vm.synced_folder '.', 'C:/vagrant/'

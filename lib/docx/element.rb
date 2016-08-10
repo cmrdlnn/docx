@@ -74,13 +74,13 @@ module Docx
       end
 
       class << self
-        def create_with(element)
+        def create_with(element, tag = nil)
           # Need to somehow get the xml document accessible here by default, but this is alright in the interim
-          new(Nokogiri::XML::Element.new("w:#{tag}", element.node))
+          new(Nokogiri::XML::Element.new("w:#{tag || self.tag}", element.node))
         end
 
-        def create_within(element)
-          new_element = create_with(element)
+        def create_within(element, tag = nil)
+          new_element = create_with(element, tag)
           new_element.append_to(element)
           new_element
         end

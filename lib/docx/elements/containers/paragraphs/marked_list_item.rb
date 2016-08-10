@@ -19,8 +19,8 @@ module Docx
         # @param value [String] bullet style
         # @return [String] bullet style
         def bullet_style=(value)
-          style_node = properties.at_xpath('//w:pStyle') ||
-                       Nokogiri::XML::Element.new('//w:pStyle', properties)
+          style_node = Container.new(properties).child('pStyle') ||
+                       Element.create_within(Container.new(properties), 'pStyle').node
           @bullet_style = style_node['w:val'] = value
         end
 
@@ -28,27 +28,27 @@ module Docx
         # @param value [Integer] list level
         # @return [Integer] list level
         def level=(value)
-          lvl_el = number_props.at_xpath('//w:ilvl') ||
-                   Nokogiri::XML::Element.new('//w:numPr', number_props)
-          @level = lvl_el['w:ilvl'] = value
+          lvl_el = Container.new(number_props).child('ilvl') ||
+                   Element.create_within(Container.new(number_props), 'ilvl').node
+          @level = lvl_el['w:val'] = value
         end
-
-        private
 
         # Writer for number option
         # @param value [Integer] number
         # @return [Integer] number
         def number=(value)
-          lvl_el = number_props.at_xpath('//w:numId') ||
-                   Nokogiri::XML::Element.new('//w:numPr', number_props)
+          lvl_el = Container.new(number_props).child('numId') ||
+                   Element.create_within(Container.new(number_props), 'numId').node
           @number = lvl_el['w:val'] = value
         end
+
+        private
 
         # Returns element of number properties contener
         # @return [Nokogiri::XML::Node] properties container
         def number_props
-          properties.at_xpath('//w:numPr') ||
-            Nokogiri::XML::Node.new('//w:numPr', properties)
+          Container.new(properties).child('numPr') ||
+            Container.create_within(Container.new(properties), 'numPr').node
         end
       end
     end

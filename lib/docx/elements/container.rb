@@ -2,10 +2,14 @@ module Docx
   module Elements
     module Containers
       class Container < Elements::Element
+        def child(type = '.')
+          @node.children.find { |e| e.name =~ /\b#{type}\b/ }
+        end
+
         # Relation methods
         # TODO: Create a properties object, include Element
         def properties
-          @node.at_xpath("//w:#{@properties_tag}") || create_properties
+          child(@properties_tag) || create_properties
         end
 
         # Erase text within an element
@@ -20,13 +24,13 @@ module Docx
         protected
 
         def create_properties
-          Nokogiri::XML::Node.new("w:#{@properties_tag}", @node)
+          Container.create_within(self, @properties_tag).node
         end
 
         class << self
-          def create_with(element)
+          def create_with(element, tag = nil)
             # Need to somehow get the xml document accessible here by default, but this is alright in the interim
-            new(Nokogiri::XML::Node.new("w:#{tag}", element.node))
+            new(Nokogiri::XML::Node.new("w:#{tag || self.tag}", element.node))
           end
         end
       end

@@ -35,8 +35,6 @@ module Docx
         end
 
         def style=(args)
-          style_tags = @node.at_xpath('w:pPr//w:rPr')
-          style_tags.children.remove
           style_tags << args
         end
 
@@ -90,6 +88,11 @@ module Docx
         alias text to_s
 
         protected
+
+        def style_tags
+          prop = @node.at_xpath('./w:pPr') || @node.add_child(Nokogiri::XML::Node.new('w:pPr', @node))
+          prop.at_xpath('./w:rPr') || prop.add_child(Nokogiri::XML::Node.new('w:rPr', @node))
+        end
 
         # Returns the alignment if any, or nil if left
         def alignment

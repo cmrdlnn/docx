@@ -34,6 +34,16 @@ module Docx
           @node.at_xpath('w:pPr//w:rPr').children
         end
 
+        def style=(args)
+          style_tags = @node.at_xpath('w:pPr//w:rPr')
+          style_tags.children.remove
+          style_tags << args
+        end
+
+        def copy_styles(paragraph)
+          self.style = paragraph.style
+        end
+
         # Return text of paragraph
         def to_s
           text_runs.map(&:text).join('')

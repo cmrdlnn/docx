@@ -40,6 +40,11 @@ module Docx
           @text_nodes.map(&:content).join('')
         end
 
+        def style=(args)
+          style_tag.children.remove
+          style_tag << args
+        end
+
         def parse_formatting
           {
             italic:    !@node.xpath('.//w:i').empty?,
@@ -80,6 +85,12 @@ module Docx
         def font_size
           size_tag = @node.xpath('w:rPr//w:sz').first
           size_tag ? size_tag.attributes['val'].value.to_i / 2 : @font_size
+        end
+
+        private
+
+        def style_tag
+          node.at_xpath('./w:rPr') || @node.add_child(Nokogiri::XML::Node.new('w:rPr', @node))
         end
       end
     end

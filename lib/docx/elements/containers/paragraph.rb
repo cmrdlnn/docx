@@ -35,8 +35,9 @@ module Docx
         end
 
         def style=(args)
-          style_tags.children.remove
-          style_tags << args
+          text_runs.each do |tr|
+            tr.style = args
+          end
         end
 
         def copy_styles(paragraph)
@@ -91,8 +92,8 @@ module Docx
         protected
 
         def style_tags
-          prop = @node.at_xpath('./w:pPr') || @node.add_child(Nokogiri::XML::Node.new('w:pPr', @node))
-          prop.at_xpath('./w:rPr') || prop.add_child(Nokogiri::XML::Node.new('w:rPr', @node))
+
+          r.at_xpath('./w:rPr') || r.add_child(Nokogiri::XML::Node.new('w:rPr', @node))
         end
 
         # Returns the alignment if any, or nil if left

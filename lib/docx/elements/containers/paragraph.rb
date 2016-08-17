@@ -35,6 +35,7 @@ module Docx
         end
 
         def style=(args)
+          style_tags.children.remove
           style_tags << args
         end
 

@@ -31,7 +31,7 @@ module Docx
         end
 
         def style
-          (@node.at_xpath('w:pPr//w:rPr') || @node.ancestors('w:pPr//w:rPr').first).children
+          (@node.at_xpath('//w:rPr') || @node.ancestors('//w:rPr').first).children
         end
 
         def style=(args)

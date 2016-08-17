@@ -30,6 +30,10 @@ module Docx
           end
         end
 
+        def style
+          @node.at_xpath('w:pPr//w:rPr').children
+        end
+
         # Return text of paragraph
         def to_s
           text_runs.map(&:text).join('')

@@ -18,15 +18,12 @@ module Docx
 
         # Set text of paragraph
         def text=(content)
-          if text_runs.size == 1
-            text_runs.first.text = content
-          elsif text_runs.empty?
+          text_runs.each { |r| r.node.remove }
+          stl = style
+          process_string(content).each do |block|
             new_r = Run.create_within(self)
-            new_r.text = content
-          else
-            text_runs.each { |r| r.node.remove }
-            new_r = Run.create_within(self)
-            new_r.text = content
+            new_r.text = block
+            new_r.style = stl
           end
         end
 
@@ -92,8 +89,11 @@ module Docx
 
         protected
 
-        def style_tags
+        def process_string(string)
+          string.scan(/\s|\p{Punct}+|[А-яЁё\w]+|\d+/)
+        end
 
+        def style_tags
           r.at_xpath('./w:rPr') || r.add_child(Nokogiri::XML::Node.new('w:rPr', @node))
         end
 

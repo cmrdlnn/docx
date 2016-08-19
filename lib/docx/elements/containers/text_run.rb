@@ -27,12 +27,9 @@ module Docx
 
         # Set text of text run
         def text=(content)
-          if @text_nodes.size == 1
-            @text_nodes.first.content = content
-          elsif @text_nodes.empty?
-            new_t = Elements::Text.create_within(self)
-            new_t.content = content
-          end
+          @text_nodes.each { |r| r.node.remove }
+          new_t = Elements::Text.create_within(self)
+          new_t.content = content
         end
 
         # Returns text contained within text run

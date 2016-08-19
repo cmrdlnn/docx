@@ -19,11 +19,9 @@ module Docx
         # Set text of paragraph
         def text=(content)
           text_runs.each { |r| r.node.remove }
-          stl = style
           process_string(content).each do |block|
             new_r = Run.create_within(self)
             new_r.text = block
-            new_r.style = stl
           end
         end
 

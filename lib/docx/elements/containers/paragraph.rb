@@ -28,11 +28,11 @@ module Docx
             new_r = Run.create_within(self)
             new_r.text = content
           end
+          self.style = style
         end
 
         def style
-          (@node.xpath('//w:rPr').find { |pr| pr.children.present? } ||
-            @node.ancestors('//w:rPr').find { |pr| pr.children.present? }).children
+          @node.xpath('.//w:rPr')
         end
 
         def style=(args)
@@ -93,7 +93,6 @@ module Docx
         protected
 
         def style_tags
-
           r.at_xpath('./w:rPr') || r.add_child(Nokogiri::XML::Node.new('w:rPr', @node))
         end
 

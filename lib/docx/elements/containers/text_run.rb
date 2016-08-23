@@ -41,8 +41,8 @@ module Docx
         end
 
         def style=(args)
-          style_tag.children.remove
-          style_tag << args
+          @node.xpath('.//w:rPr').remove
+          @node.children.first.add_previous_sibling(args)
         end
 
         def parse_formatting
@@ -90,7 +90,7 @@ module Docx
         private
 
         def style_tag
-          node.at_xpath('./w:rPr') || @node.add_child(Nokogiri::XML::Node.new('w:rPr', @node))
+          node.at_xpath('.//w:rPr') || @node.add_child(Nokogiri::XML::Node.new('w:rPr', @node))
         end
       end
     end

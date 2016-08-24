@@ -8,11 +8,11 @@ module Docx
       class MarkedListItem < Paragraph
         attr_accessor :bullet_style, :level
         attr_reader :number
-        def initialize(node, document_properties = {})
+        def initialize(node, number, document_properties = {})
           super(node, document_properties)
           self.bullet_style = 'ListParagraph'
           self.level = 0
-          self.number = 1
+          self.number = number
         end
 
         # Writer for bullet style of list item

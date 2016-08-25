@@ -6,9 +6,8 @@ module Docx
       # Bulleted list item model
       # @author [kbobykin]
       class MarkedListItem < Paragraph
-        attr_accessor :bullet_style, :level
-        attr_reader :number
-        def initialize(node, number, document_properties = {})
+        attr_accessor :bullet_style, :level, :number
+        def initialize(node, number = 1, document_properties = {})
           super(node, document_properties)
           self.bullet_style = 'ListParagraph'
           self.level = 0

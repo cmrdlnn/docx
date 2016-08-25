@@ -33,7 +33,7 @@ module Docx
         end
 
         def style
-          @node.xpath('.//w:rPr')
+          @node.at_xpath('.//w:rPr')
         end
 
         def style=(args)

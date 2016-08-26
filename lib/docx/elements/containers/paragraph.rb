@@ -23,12 +23,12 @@ module Docx
           elsif text_runs.empty?
             new_r = Run.create_within(self)
             new_r.text = content
-            self.style = style
+            self.style = style if style
           else
             text_runs.each { |r| r.node.remove }
             new_r = Run.create_within(self)
             new_r.text = content
-            self.style = style
+            self.style = style if style
           end
         end
 

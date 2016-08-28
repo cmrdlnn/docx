@@ -12,7 +12,7 @@ module Docx
 
       # TODO: Should create a docx object from this
       def parent(type = '*')
-        @node.at_xpath("./parent::#{type}")
+        @node.at_xpath("//parent::#{type}")
       end
 
       # Get parent paragraph of element

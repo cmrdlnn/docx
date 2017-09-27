@@ -425,4 +425,15 @@ describe Docx::Document do
       File.delete(temp_file_path) if File.exist?(temp_file_path)
     end
   end
+
+  describe 'headers and footers' do
+    before do
+      @doc = Docx::Document.open(@fixtures_path + '/headers_footers.docx')
+    end
+
+    it 'should read headers and footers' do
+      expect(@doc.headers.size).to eql(3)
+      expect(@doc.footers.size).to eql(2)
+    end
+  end
 end

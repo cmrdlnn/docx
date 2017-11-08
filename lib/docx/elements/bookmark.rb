@@ -24,28 +24,6 @@ module Docx
         text_run.text = "#{text_run.text}#{text}"
       end
 
-      # insert multiple lines starting with paragraph containing bookmark node.
-      def insert_multiple_lines(text_array)
-        # Hold paragraphs to be inserted into, corresponding to the index of the strings in the text array
-        paragraphs = []
-        paragraph = parent_paragraph
-        # Remove text from paragraph
-        paragraph.blank!
-        paragraphs << paragraph
-        for i in 0...(text_array.size - 1)
-          # Copy previous paragraph
-          new_p = paragraphs[i].copy
-          # Insert as sibling of previous paragraph
-          new_p.insert_after(paragraphs[i])
-          paragraphs << new_p
-        end
-
-        # Insert text into corresponding newly created paragraphs
-        paragraphs.each_index do |index|
-          paragraphs[index].text = text_array[index]
-        end
-      end
-
       # Get text run immediately prior to bookmark node
       def get_run_before
         # at_xpath returns the first match found and preceding-sibling returns siblings in the

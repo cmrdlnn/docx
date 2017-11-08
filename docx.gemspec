@@ -6,7 +6,15 @@ Gem::Specification.new do |s|
   s.version     = Docx::VERSION
   s.summary     = 'a ruby library/gem for interacting with .docx files'
   s.description = s.summary
-  s.authors     = ['Christopher Hunt', 'Marcus Ortiz', 'Higgins Dragon', 'Toms Mikoss', 'Sebastian Wittenkamp']
+  s.authors     = [
+    'Christopher Hunt',
+    'Marcus Ortiz',
+    'Higgins Dragon',
+    'Toms Mikoss',
+    'Sebastian Wittenkamp',
+    'Kirill Bobykin',
+    'Nikolay Ulyanov'
+  ]
   s.email       = ['chrahunt@gmail.com']
   s.homepage    = 'https://github.com/chrahunt/docx'
   s.files       = Dir['README.md', 'LICENSE.md', 'lib/**/*.rb']
